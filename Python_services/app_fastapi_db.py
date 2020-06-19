@@ -61,8 +61,8 @@ async def Logincheck(user: User):
         password = user.password
         if pwd_context.verify(password, mpassword):
             token = jwt.encode(
-                {'user': user.username, 'scope': 'user', 'iss': 'https://sangam.ai/',
-                 'sub': 'Aryabhatta',
+                {'user': user.username, 'scope': 'user', 'iss': 'Your Service Provider',
+                 'sub': 'Subject',
                  'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=10)},
                 'SECRET_KEY')
 
@@ -104,7 +104,7 @@ async def genpassword(background_tasks: BackgroundTasks, user: UserInDB) -> JSON
         chars = string.ascii_letters + string.digits + '!@#$%^&*()'
         random.seed = (os.urandom(1024))
         newpass = (''.join(random.choice(chars) for i in range(length)))
-        mail = FastMail(email="paidipraneethkumar@gmail.com", password=MAIL_PASS, tls=True, port="587",
+        mail = FastMail(email="Your Gmail Account", password=MAIL_PASS, tls=True, port="587",
                         service="gmail")
         background_tasks.add_task(mail.send_message, recipient=row["Email"], subject="AUTH-E Password Generation",
                                   body="Generated password is :  " + newpass, text_format="html")
