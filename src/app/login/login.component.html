@@ -1,0 +1,108 @@
+<div class = "background">
+
+  <div  class="login-box">
+
+
+
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Login</a>
+        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Sign-UP</a>
+      </div>
+    </nav>
+
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <div *ngIf = "check">
+          <h2 style="margin-top: 20px;">Login</h2>
+          <form>
+            <div class="user-box">
+              <input type="text" name="" required="" (input)="userN=$event.target.value">
+              <label>Username</label>
+            </div>
+            <div class="user-box">
+              <input type="password" name="" required=""(input)="pass=$event.target.value">
+              <label>Password</label>
+            </div>
+            <a href="#">
+              <span></span>
+              <span></span>
+              <span></span>
+              <button type="button" class="btn btn-outline-secondary"(click)="getDetails()">Login</button>
+            </a>
+          </form>
+        </div>
+
+
+        <div *ngIf ="!check" style="color:white">
+          <span *ngIf = "match == 'False'">
+            <h2 style="margin-top: 20px;">Wrong User Credentials</h2>
+            <form style="margin-top: 20px;">
+              <div class="user-box">
+                <input type="text" name="" required="" (input)="userN=$event.target.value">
+                <label>Username</label>
+              </div>
+              <button class="float-right"(click)="FindUser()">Check User</button>
+            </form>
+            <div>
+              <span *ngIf ="userFound">
+              <br>
+              <br>
+                <h4 style="margin-top: 20px;">New Password will be sent to your registered mail</h4>
+                <button class= "w-100 text-center btn btn-success"(click)="genpass()"style="margin-top: 20px;">send</button>
+              </span>
+              <span *ngIf ="!userFound">
+                No User Exists
+              </span>
+            </div>
+          </span>
+        </div>
+        <button class="w-100 text-center btn btn-danger float-right" *ngIf="!check" (click)="retry()" style="margin-top: 40px;">Try Again</button>
+      </div>
+
+
+      <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+        <h2 style="margin-top: 20px;">Sign Up</h2>
+        <form>
+          <div class="user-box">
+            <input type="text" name="" required=""(input)="userN=$event.target.value">
+            <label>Username</label>
+          </div>
+          <div class="user-box">
+            <input type="password" name="" required=""(input)="pass=$event.target.value">
+            <label>Password</label>
+          </div>
+
+          <div class="user-box">
+            <input type="email" name="" required=""(input)="email=$event.target.value">
+            <label>E-mail</label>
+          </div>
+
+          <div class="user-box">
+                <input type="date" name="date"(input)="DOB=$event.target.value">
+                <label>Date Of Birth </label>
+          </div>
+
+          <div class="row">
+              <div class ="col-6">
+                <div class="user-box">
+                  <input type="text" name="" required=""(input)="FN=$event.target.value">
+                  <label>FirstName</label>
+                </div>
+              </div>
+              <div class ="col-6">
+                <div class="user-box">
+                  <input type="text" name="" required=""(input)="LN=$event.target.value">
+                  <label>LastName</label>
+                </div>
+              </div>
+          </div>
+        </form>
+        <input class = "float-left"type="submit" value="Create" (click)="sendDetails()">
+        <button type="button" class="btn btn-light float-right" routerLink="/login">Back to login</button>
+        <h3  *ngIf = "match == 'True'" class="w-100 text-center"style="color:green">User Created</h3><br>
+      </div>
+    </div>
+
+  </div>
+</div>
